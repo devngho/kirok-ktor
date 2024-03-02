@@ -1,4 +1,4 @@
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.devngho/kirok-ktor/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.devngho/kirok-svelte-binding)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.devngho/kirok-ktor/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.devngho/kirok-ktor)
 
 # kirok-ktor
 
