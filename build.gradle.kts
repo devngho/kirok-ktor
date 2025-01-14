@@ -1,22 +1,19 @@
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
+@file:OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
 
 plugins {
-    kotlin("multiplatform") version "1.9.22"
-    kotlin("plugin.serialization") version "1.9.22"
-    id("org.jetbrains.dokka") version "1.9.0"
+    kotlin("multiplatform") version "2.1.0"
+    kotlin("plugin.serialization") version "2.1.0"
+    id("org.jetbrains.dokka") version "2.0.0"
     `maven-publish`
     signing
 }
 
 group = "io.github.devngho"
-version = "1.1.0"
+version = "1.1.2"
 
 repositories {
     mavenCentral()
     mavenLocal()
-    repositories.maven {
-        url = uri("https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental")
-    }
 }
 
 val dokkaHtml by tasks.getting(org.jetbrains.dokka.gradle.DokkaTask::class)
@@ -38,22 +35,21 @@ kotlin {
         }
     }
 
-    @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         binaries.executable()
         browser {}
-        applyBinaryen()
     }
 
     sourceSets {
-        val ktorVersion = "2.3.8"
-        val wasmKtorVersion = "3.0.0-wasm2"
-        val kotestVersion = "5.8.0"
+        val ktorVersion = "3.0.3"
+        val serializationVersion = "1.8.0"
+        val kotestVersion = "5.9.1"
 
         commonMain {
             dependencies {
-                implementation("io.github.devngho:kirok:1.1.0")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
+                implementation("io.github.devngho:kirok:1.1.2")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
             }
         }
         jvmMain {
@@ -73,9 +69,7 @@ kotlin {
         }
         val wasmJsMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-core:$wasmKtorVersion")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core-wasm-js:1.6.1-wasm1")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-wasm-js:1.6.1-wasm1")
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
             }
         }
 

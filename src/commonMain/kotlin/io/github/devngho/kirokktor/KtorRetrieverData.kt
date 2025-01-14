@@ -1,6 +1,5 @@
 package io.github.devngho.kirokktor
 
-import io.github.devngho.kirokktor.KtorRetrieverData.RetrieverType
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -11,6 +10,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonElement
 
+@ExposedCopyVisibility
 @Serializable
 data class KtorRetrieverData internal constructor(
     val type: RetrieverType,

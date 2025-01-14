@@ -2,20 +2,16 @@ package io.github.devngho.kirokktor
 
 import io.github.devngho.kirok.RetrieverData
 import io.ktor.http.*
-import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.InternalSerializationApi
-import kotlinx.serialization.KSerializer
+import kotlinx.serialization.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromJsonElement
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
-import kotlinx.serialization.serializer
 import kotlin.reflect.KClass
 
 @KirokKtorDSLMarker
@@ -78,7 +74,7 @@ class KtorRetrieveServer {
         convertException = block
     }
 
-    fun build(): ApplicationEngine {
+    fun build(): EmbeddedServer<*, *> {
         return embeddedServer(Netty, port = 8080) {
             routing {
                 post("/retrieve") {
@@ -97,7 +93,7 @@ class KtorRetrieveServer {
     sealed interface CallResult {
         data class Success(val data: Any): CallResult
         data object NotFound : CallResult
-        data class UnknownError(val throwable: Throwable): CallResult
+        data class UnknownError(@Transient val throwable: Throwable): CallResult
     }
 
 

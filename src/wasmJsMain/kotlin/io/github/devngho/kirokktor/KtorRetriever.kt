@@ -8,7 +8,6 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import kotlin.reflect.KClass
@@ -19,7 +18,7 @@ actual object KtorRetriever: Retriever<KtorRetrieverInfo> {
 
     @OptIn(InternalSerializationApi::class)
     @Suppress("UNCHECKED_CAST")
-    override suspend fun <U : Any> retrieve(
+    actual override suspend fun <U : Any> retrieve(
         info: KtorRetrieverInfo?,
         clazz: KClass<U>,
         dataClazz: KClass<out RetrieverData>,
@@ -38,7 +37,7 @@ actual object KtorRetriever: Retriever<KtorRetrieverInfo> {
 
     @OptIn(InternalSerializationApi::class)
     @Suppress("UNCHECKED_CAST")
-    override suspend fun <U : Any> intent(
+    actual override suspend fun <U : Any> intent(
         info: KtorRetrieverInfo?,
         name: String,
         model: U,
