@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "io.github.devngho"
-version = "1.1.2"
+version = "1.1.3"
 
 repositories {
     mavenCentral()
@@ -26,7 +26,7 @@ val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
 
 kotlin {
     withSourcesJar(true)
-    jvmToolchain(19)
+    jvmToolchain(21)
 
     jvm {
         withJava()
@@ -47,7 +47,7 @@ kotlin {
 
         commonMain {
             dependencies {
-                implementation("io.github.devngho:kirok:1.1.2")
+                implementation("io.github.devngho:kirok:1.1.3")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
             }
